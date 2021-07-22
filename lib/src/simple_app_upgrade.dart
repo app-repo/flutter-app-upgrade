@@ -173,7 +173,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
   ///
   _buildTitle() {
     return Padding(
-        padding: EdgeInsets.only(top: 28, bottom: 20, left: 21),
+        padding: EdgeInsets.only(top: 28, bottom: 20),
         child: Text(widget.title ?? '',
             style: widget.titleStyle ?? TextStyle(fontSize: 22)));
   }
