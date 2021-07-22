@@ -212,6 +212,15 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
                 : Expanded(
                     child: _buildCancelActionButton(),
                   ),
+            widget.force
+                ? Container()
+                : SizedBox(
+                    height: 45,
+                    width: 0.5,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: Color(0xFF182C4E).withOpacity(0.1)),
+                    )),
             Expanded(
               child: _buildOkActionButton(),
             ),
@@ -233,14 +242,6 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(widget.borderRadius)),
           child: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                left: BorderSide(
-                  width: 0.5, //宽度
-                  color: Color(0xFF182C4E).withOpacity(0.1), //边框颜色
-                ),
-              ),
-            ),
             height: 45,
             alignment: Alignment.center,
             child: Text(widget.cancelText ?? '以后再说',
