@@ -156,6 +156,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
     return Container(
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           //标题
           _buildTitle(),
