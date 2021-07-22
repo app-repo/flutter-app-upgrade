@@ -202,8 +202,8 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
     return Column(
       children: <Widget>[
         Divider(
-          height: 1,
-          color: Colors.grey,
+          height: 0.5,
+          color: Color(0xFF182C4E).withOpacity(0.1),
         ),
         Row(
           children: <Widget>[
@@ -233,6 +233,14 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
           borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(widget.borderRadius)),
           child: Container(
+            decoration: BoxDecoration(
+              border: Border(
+                left: BorderSide(
+                  width: 0.5, //宽度
+                  color: Color(0xFF182C4E).withOpacity(0.1), //边框颜色
+                ),
+              ),
+            ),
             height: 45,
             alignment: Alignment.center,
             child: Text(widget.cancelText ?? '以后再说',
@@ -351,7 +359,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
     } catch (e) {
       print('$e');
       _downloadProgress = 0;
-      _updateDownloadStatus(DownloadStatus.error,error: e);
+      _updateDownloadStatus(DownloadStatus.error, error: e);
     }
   }
 
