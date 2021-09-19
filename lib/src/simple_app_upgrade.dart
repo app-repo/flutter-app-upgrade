@@ -12,9 +12,9 @@ import 'liquid_progress_indicator.dart';
 ///
 class SimpleAppUpgradeWidget extends StatefulWidget {
   const SimpleAppUpgradeWidget(
-      {@required this.title,
+      {required this.title,
       this.titleStyle,
-      @required this.contents,
+      required this.contents,
       this.contentStyle,
       this.cancelText,
       this.cancelTextStyle,
@@ -24,9 +24,9 @@ class SimpleAppUpgradeWidget extends StatefulWidget {
       this.progressBar,
       this.progressBarColor,
       this.borderRadius = 10,
-      this.downloadUrl,
+      this.downloadUrl = '',
       this.force = false,
-      this.iosAppId,
+      this.iosAppId = '',
       this.appMarketInfo,
       this.onCancel,
       this.onOk,
@@ -41,7 +41,7 @@ class SimpleAppUpgradeWidget extends StatefulWidget {
   ///
   /// 标题样式
   ///
-  final TextStyle titleStyle;
+  final TextStyle? titleStyle;
 
   ///
   /// 升级提示内容
@@ -51,42 +51,42 @@ class SimpleAppUpgradeWidget extends StatefulWidget {
   ///
   /// 提示内容样式
   ///
-  final TextStyle contentStyle;
+  final TextStyle? contentStyle;
 
   ///
   /// 下载进度条
   ///
-  final Widget progressBar;
+  final Widget? progressBar;
 
   ///
   /// 进度条颜色
   ///
-  final Color progressBarColor;
+  final Color? progressBarColor;
 
   ///
   /// 确认控件
   ///
-  final String okText;
+  final String? okText;
 
   ///
   /// 确认控件样式
   ///
-  final TextStyle okTextStyle;
+  final TextStyle? okTextStyle;
 
   ///
   /// 确认控件背景颜色,2种颜色左到右线性渐变
   ///
-  final List<Color> okBackgroundColors;
+  final List<Color>? okBackgroundColors;
 
   ///
   /// 取消控件
   ///
-  final String cancelText;
+  final String? cancelText;
 
   ///
   /// 取消控件样式
   ///
-  final TextStyle cancelTextStyle;
+  final TextStyle? cancelTextStyle;
 
   ///
   /// app安装包下载url,没有下载跳转到应用宝等渠道更新
@@ -112,12 +112,12 @@ class SimpleAppUpgradeWidget extends StatefulWidget {
   /// 指定跳转的应用市场，
   /// 如果不指定将会弹出提示框，让用户选择哪一个应用市场。
   ///
-  final AppMarketInfo appMarketInfo;
+  final AppMarketInfo? appMarketInfo;
 
-  final VoidCallback onCancel;
-  final VoidCallback onOk;
-  final DownloadProgressCallback downloadProgress;
-  final DownloadStatusChangeCallback downloadStatusChange;
+  final VoidCallback? onCancel;
+  final VoidCallback? onOk;
+  final DownloadProgressCallback? downloadProgress;
+  final DownloadStatusChangeCallback? downloadStatusChange;
 
   @override
   State<StatefulWidget> createState() => _SimpleAppUpgradeWidget();
@@ -174,7 +174,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
   _buildTitle() {
     return Padding(
         padding: EdgeInsets.only(top: 28, bottom: 20),
-        child: Text(widget.title ?? '',
+        child: Text(widget.title,
             style: widget.titleStyle ?? TextStyle(fontSize: 22)));
   }
 
@@ -267,7 +267,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
     }
     var _okBackgroundColors = widget.okBackgroundColors;
     if (widget.okBackgroundColors == null ||
-        widget.okBackgroundColors.length != 2) {
+        widget.okBackgroundColors!.length != 2) {
       _okBackgroundColors = [
         Theme.of(context).primaryColor,
         Theme.of(context).primaryColor
@@ -278,7 +278,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
           gradient: LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [_okBackgroundColors[0], _okBackgroundColors[1]]),
+              colors: [_okBackgroundColors![0], _okBackgroundColors[1]]),
           borderRadius: borderRadius),
       child: InkWell(
         borderRadius: borderRadius,
@@ -319,7 +319,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
       FlutterUpgrade.toAppStore(widget.iosAppId);
       return;
     }
-    if (widget.downloadUrl == null || widget.downloadUrl.isEmpty) {
+    if (widget.downloadUrl.isEmpty) {
       //没有下载地址，跳转到第三方渠道更新，原生实现
       FlutterUpgrade.toMarket(appMarketInfo: widget.appMarketInfo);
       return;
