@@ -79,7 +79,7 @@ class _HomeState extends State<Home> {
     );
   }
 
-  Future<AppUpgradeInfo> _checkAppInfo() async {
+  Future<AppUpgradeInfo?> _checkAppInfo() async {
     //这里一般访问网络接口，将返回的数据解析成如下格式
     return Future.delayed(Duration(seconds: 1), () {
       return AppUpgradeInfo(
