@@ -7,7 +7,10 @@
 
 ```
 dependencies:
-  flutter_app_upgrade: ^1.1.0
+  flutter_app_upgrade: 
+    git: 
+      url: https://github.com/app-repo/flutter-app-upgrade
+      ref: v0.0.3
 ```
 
 2、执行flutter命令获取包：
