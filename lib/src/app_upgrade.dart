@@ -71,6 +71,7 @@ class AppUpgrade {
         _showUpgradeDialog(
             context, appUpgradeInfo.title!, appUpgradeInfo.contents,
             apkDownloadUrl: appUpgradeInfo.apkDownloadUrl,
+            downloadPageUrl: appUpgradeInfo.downloadPageUrl,
             force: appUpgradeInfo.force,
             titleStyle: titleStyle,
             contentStyle: contentStyle,
@@ -101,6 +102,7 @@ class AppUpgrade {
     String title,
     List<String> contents, {
     String? apkDownloadUrl,
+    Map<String, String>? downloadPageUrl,
     bool force = false,
     TextStyle? titleStyle,
     TextStyle? contentStyle,
@@ -147,6 +149,7 @@ class AppUpgrade {
                     progressBarColor: progressBarColor,
                     borderRadius: borderRadius,
                     downloadUrl: apkDownloadUrl ?? '',
+                    downloadPageUrl: downloadPageUrl,
                     force: force,
                     iosAppId: iosAppId ?? '',
                     appMarketInfo: appMarketInfo,
@@ -173,6 +176,7 @@ class AppUpgradeInfo {
       {required this.title,
       required this.contents,
       this.apkDownloadUrl,
+      this.downloadPageUrl,
       this.force = false});
 
   ///
@@ -189,6 +193,11 @@ class AppUpgradeInfo {
   /// apk下载url
   ///
   final String? apkDownloadUrl;
+
+  ///
+  /// 下载页面url
+  ///
+  final Map<String, String>? downloadPageUrl;
 
   ///
   /// 是否强制升级

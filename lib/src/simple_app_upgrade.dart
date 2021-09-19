@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_upgrade/flutter_app_upgrade.dart';
 import 'package:flutter_app_upgrade/src/download_status.dart';
@@ -25,6 +26,7 @@ class SimpleAppUpgradeWidget extends StatefulWidget {
       this.progressBarColor,
       this.borderRadius = 10,
       this.downloadUrl = '',
+      this.downloadPageUrl,
       this.force = false,
       this.iosAppId = '',
       this.appMarketInfo,
@@ -92,6 +94,11 @@ class SimpleAppUpgradeWidget extends StatefulWidget {
   /// app安装包下载url,没有下载跳转到应用宝等渠道更新
   ///
   final String downloadUrl;
+
+  ///
+  /// 下载页面网址,用于跳转到下载页面
+  ///
+  final Map<String, String>? downloadPageUrl;
 
   ///
   /// 圆角半径
@@ -309,11 +316,23 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
         );
   }
 
+  String getPageUrl() {
+    if (widget.downloadPageUrl == null) {
+      return '';
+    }
+    return widget.downloadPageUrl![Platform.operatingSystem] ?? '';
+  }
+
   ///
   /// 点击确定按钮
   ///
   _clickOk() async {
     widget.onOk?.call();
+    String pageUrl = getPageUrl();
+    if (pageUrl.isNotEmpty) {
+      launch(pageUrl, enableJavaScript: true, enableDomStorage: true);
+      return;
+    }
     if (Platform.isIOS) {
       //ios 需要跳转到app store更新，原生实现
       FlutterUpgrade.toAppStore(widget.iosAppId);
