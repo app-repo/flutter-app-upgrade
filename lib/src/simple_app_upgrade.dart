@@ -173,7 +173,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
   ///
   _buildTitle() {
     return Padding(
-        padding: EdgeInsets.only(top: 20, bottom: 30),
+        padding: EdgeInsets.only(top: 28, bottom: 20),
         child: Text(widget.title ?? '',
             style: widget.titleStyle ?? TextStyle(fontSize: 22)));
   }
@@ -183,7 +183,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
   ///
   _buildAppInfo() {
     return Container(
-        padding: EdgeInsets.only(left: 15, right: 15, bottom: 30),
+        padding: EdgeInsets.only(left: 21, right: 21, bottom: 30),
         height: 200,
         child: ListView(
           children: widget.contents.map((f) {
@@ -202,8 +202,8 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
     return Column(
       children: <Widget>[
         Divider(
-          height: 1,
-          color: Colors.grey,
+          height: 0.5,
+          color: Color(0xFF182C4E).withOpacity(0.1),
         ),
         Row(
           children: <Widget>[
@@ -212,6 +212,15 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
                 : Expanded(
                     child: _buildCancelActionButton(),
                   ),
+            widget.force
+                ? Container()
+                : SizedBox(
+                    height: 45,
+                    width: 0.5,
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                          color: Color(0xFF182C4E).withOpacity(0.1)),
+                    )),
             Expanded(
               child: _buildOkActionButton(),
             ),
@@ -351,7 +360,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
     } catch (e) {
       print('$e');
       _downloadProgress = 0;
-      _updateDownloadStatus(DownloadStatus.error,error: e);
+      _updateDownloadStatus(DownloadStatus.error, error: e);
     }
   }
 
