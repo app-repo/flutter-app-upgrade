@@ -98,7 +98,7 @@ class SimpleAppUpgradeWidget extends StatefulWidget {
   ///
   /// 下载页面网址,用于跳转到下载页面
   ///
-  final Map<String, String>? downloadPageUrl;
+  final String? downloadPageUrl;
 
   ///
   /// 圆角半径
@@ -317,10 +317,7 @@ class _SimpleAppUpgradeWidget extends State<SimpleAppUpgradeWidget> {
   }
 
   String getPageUrl() {
-    if (widget.downloadPageUrl == null) {
-      return '';
-    }
-    return widget.downloadPageUrl![Platform.operatingSystem] ?? '';
+    return widget.downloadPageUrl ?? '';
   }
 
   ///

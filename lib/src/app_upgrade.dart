@@ -102,7 +102,7 @@ class AppUpgrade {
     String title,
     List<String> contents, {
     String? apkDownloadUrl,
-    Map<String, String>? downloadPageUrl,
+    String? downloadPageUrl,
     bool force = false,
     TextStyle? titleStyle,
     TextStyle? contentStyle,
@@ -197,7 +197,7 @@ class AppUpgradeInfo {
   ///
   /// 下载页面url
   ///
-  final Map<String, String>? downloadPageUrl;
+  final String? downloadPageUrl;
 
   ///
   /// 是否强制升级
